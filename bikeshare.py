@@ -60,7 +60,7 @@ def get_filters():
 
     while active_3:
         day = str(input(prompt_3))
-        if (day == ('monday') or day == ('tuesday') or day == ('wednesday') or day == ('thursday') or day == ('friday') or day == ('saturday') or day == ('sunday') or day == ('all')):
+        if day in ('monday','tuesday','wednesday','thursday','friday','saturday','sunday','all'):
             print('Perfect, you have selected: ' + day.upper() + '. Let\'s go on.')
             break
         elif day == 'quit':
