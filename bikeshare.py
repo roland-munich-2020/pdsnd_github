@@ -45,7 +45,7 @@ def get_filters():
 
     while active_2:
         month = str(input(prompt_2))
-        if (month == ('january') or month == ('february') or month == ('march') or month == ('april') or month == ('may') or month == ('june') or month == ('july') or month == ('august') or month == ('september') or month == ('october' ) or month == str('november') or month == ('december') or month == ('all')):
+        if month in ('january','february','march','april','may','june','july','august','september','october','november','december','all'):
             print('Perfect, you have selected: ' + month.upper() + '. Let\'s go on.')
             break
         elif month == 'quit':
