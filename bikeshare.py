@@ -30,12 +30,12 @@ def get_filters():
 
     while active_1:
         city = str(input(prompt_1))
-        if (city == ('chicago') or city == ('new york city') or city == ('washington')):
+        if city in ('chicago','new york city','washington'):
             print('Perfect, you have selected: ' + city.upper() + '. Let\'s go on.')
             break
         elif city == 'quit':
             active_1 = False
-            return
+
 
 
     # get user input for month (all, january, february, ... , june)
@@ -45,12 +45,12 @@ def get_filters():
 
     while active_2:
         month = str(input(prompt_2))
-        if (month == ('january') or month == ('february') or month == ('march') or month == ('april') or month == ('may') or month == ('june') or month == ('july') or month == ('august') or month == ('september') or month == ('october' ) or month == str('november') or month == ('december') or month == ('all')):
+        if month in ('january','february','march','april','may','june','july','august','september','october','november','december','all'):
             print('Perfect, you have selected: ' + month.upper() + '. Let\'s go on.')
             break
         elif month == 'quit':
             active_2 = False
-            return
+
 
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
@@ -60,12 +60,12 @@ def get_filters():
 
     while active_3:
         day = str(input(prompt_3))
-        if (day == ('monday') or day == ('tuesday') or day == ('wednesday') or day == ('thursday') or day == ('friday') or day == ('saturday') or day == ('sunday') or day == ('all')):
+        if day in ('monday','tuesday','wednesday','thursday','friday','saturday','sunday','all'):
             print('Perfect, you have selected: ' + day.upper() + '. Let\'s go on.')
             break
         elif day == 'quit':
             active_3 = False
-            return
+
 
 
     print('-'*40)
@@ -214,7 +214,6 @@ def raw_data(df):
     Args:
     (str) raw_data - stores user input
     """
-
     prompt_4 = '\nWould you like to see raw data for your selection. Please type "yes" or "no":'
     prompt_5 = '\nWould you like to see more raw data for your selection. Please type "yes" or "no":'
     prompt_6 = '\nPlease type "yes" or "no":'
