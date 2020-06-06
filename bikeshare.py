@@ -23,26 +23,26 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-   
+
     prompt_1 = '\nWould you like to see data of Chicago, New York City or Washington. Please enter the name in lowercase letters. If you want to leave now type "quit":'
     active_1 = True
     city = str()
-    
+
     while active_1:
         city = str(input(prompt_1))
         if (city == ('chicago') or city == ('new york city') or city == ('washington')):
             print('Perfect, you have selected: ' + city.upper() + '. Let\'s go on.')
             break
         elif city == 'quit':
-            active_1 = False   
+            active_1 = False
             return
-           
-     
+
+
     # get user input for month (all, january, february, ... , june)
     prompt_2 = '\nFor which month would you like to see data? Please enter the name of the month in lowercase letters). Enter "all" for all months. If you want to leave now type "quit":'
     active_2 = True
     month = str()
-    
+
     while active_2:
         month = str(input(prompt_2))
         if (month == ('january') or month == ('february') or month == ('march') or month == ('april') or month == ('may') or month == ('june') or month == ('july') or month == ('august') or month == ('september') or month == ('october' ) or month == str('november') or month == ('december') or month == ('all')):
@@ -50,14 +50,14 @@ def get_filters():
             break
         elif month == 'quit':
             active_2 = False
-            return  
-        
+            return
+
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     prompt_3 = '\nFor which day would you like to see data? Please enter the day in lowercase letters. Enter "all" for all months. If you want to leave now type "quit":'
     active_3 = True
     day = str()
-    
+
     while active_3:
         day = str(input(prompt_3))
         if (day == ('monday') or day == ('tuesday') or day == ('wednesday') or day == ('thursday') or day == ('friday') or day == ('saturday') or day == ('sunday') or day == ('all')):
@@ -66,11 +66,11 @@ def get_filters():
         elif day == 'quit':
             active_3 = False
             return
-        
+
 
     print('-'*40)
     return city, month, day
-    
+
 
 def load_data(city, month, day):
     """
@@ -82,21 +82,21 @@ def load_data(city, month, day):
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
-    """     
-    
+    """
+
     df = pd.read_csv(CITY_DATA[city])
     df.dropna(axis = 0)
-    df['Start Time'] = pd.to_datetime(df['Start Time'])  
+    df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['End Time'] = pd.to_datetime(df['End Time'])
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.dayofweek
-                                     
+
 
     if month != 'all':
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june','july','august','september', 'october', 'november','december']
         month = months.index(month) + 1
-         
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -104,13 +104,13 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday','sunday']
-        day = days.index(day) 
+        day = days.index(day)
         df = df[df['day_of_week'] == day]
-          
-   
+
+
     return df
 
-   
+
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -134,7 +134,7 @@ def time_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
@@ -156,7 +156,7 @@ def station_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -185,14 +185,14 @@ def user_stats(df):
         # Display counts of user types
         count_user_types = df.pivot_table(index=['User Type'], aggfunc='size')
         print('Counts of:', count_user_types)
-    
+
         # Display counts of gender
-               
+
         count_genders = df.pivot_table(index=['Gender'], aggfunc='size')
-        print('Counts of:', count_genders)   
-    
+        print('Counts of:', count_genders)
+
         # Display earliest, most recent, and most common year of birth
-    
+
         early_birth_year = df['Birth Year'].min()
         print('Eearliest year of birth:', int(early_birth_year))
 
@@ -200,23 +200,28 @@ def user_stats(df):
         print('Most recent year of birth:', int(late_birth_year))
 
         common_birth_year = df['Birth Year'].mode()[0]
-        print('Most common year of birth:', int(common_birth_year)) 
+        print('Most common year of birth:', int(common_birth_year))
 
         print("\nThis took %s seconds." % (time.time() - start_time))
-        print('-'*40) 
-    
+        print('-'*40)
+
     except Exception: print("Sorry, we encountered an error generating more statistics. More statistics are not available for this selection. Please pick another city.")
   
 def raw_data(df):
-    """Displays raw data on demand, five rows at a time. Handles incorrect user input."""
-    
+    """
+    Displays raw data on demand, five rows at a time. Handles incorrect user input.
+
+    Args:
+    (str) raw_data - stores user input
+    """
+
     prompt_4 = '\nWould you like to see raw data for your selection. Please type "yes" or "no":'
     prompt_5 = '\nWould you like to see more raw data for your selection. Please type "yes" or "no":'
     prompt_6 = '\nPlease type "yes" or "no":'
     i = 5
     active_4 = True
     raw_data = str(input(prompt_4))
-         
+
     while active_4:
         if raw_data == 'yes':
             print('Ok. printing data:\n ')
@@ -227,7 +232,7 @@ def raw_data(df):
             active_4 = False
         else: raw_data = str(input(prompt_6))
 
-    
+
 def main():
     """Calls functions and handles exceptions. Asks user if a restart is wanted."""
     while True:
@@ -239,13 +244,13 @@ def main():
             trip_duration_stats(df)
             user_stats(df)
             raw_data(df)
-            
+
         except (ValueError, TypeError):
             print("Bye bye.")
-        
+
         except IndexError:
             print("Sorry this data is not available. Please pick a month before July.")
-                
+
         restart = input('\nWould you like to restart? Enter "yes" or "no":\n')
         if restart.lower() != 'yes':
             break
