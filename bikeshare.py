@@ -14,7 +14,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
 
 def get_filters():
     """
-    Asks user to specify a city, month, and day to analyze. Handles incorrect user input.
+    Asks user to specify a city, month, and day to analyze. Handles incorrect user input. Let's the use also to choose to quit at any point and start all over.
 
     Returns:
         (str) city - name of the city to analyze
@@ -206,7 +206,7 @@ def user_stats(df):
         print('-'*40)
 
     except Exception: print("Sorry, we encountered an error generating more statistics. More statistics are not available for this selection. Please pick another city.")
-  
+
 def raw_data(df):
     """
     Displays raw data on demand, five rows at a time. Handles incorrect user input.
