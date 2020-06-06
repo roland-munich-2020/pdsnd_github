@@ -30,7 +30,7 @@ def get_filters():
 
     while active_1:
         city = str(input(prompt_1))
-        if (city == ('chicago') or city == ('new york city') or city == ('washington')):
+        if city in ('chicago','new york city','washington'):
             print('Perfect, you have selected: ' + city.upper() + '. Let\'s go on.')
             break
         elif city == 'quit':
@@ -65,7 +65,7 @@ def get_filters():
             break
         elif day == 'quit':
             active_3 = False
-            
+
 
 
     print('-'*40)
